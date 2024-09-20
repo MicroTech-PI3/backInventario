@@ -26,7 +26,7 @@ export const DeleteProduct = async (req, res) => {
         conn = await pool.getConnection();
         console.log("Iniciando la conexión");
         const rows = await conn.query("DELETE FROM PRODUCT WHERE ID= " + req.params.IdProduct + ";" );
-        console.log("Datos obtenidos: ", rows); // Verifica qué datos se están obteniendo
+        console.log("Datos obtenidos: ", rows);
         if (rows.length > 0) {
         res.json(rows);
         } else {
