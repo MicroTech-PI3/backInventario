@@ -1,11 +1,12 @@
 import { Router } from "express";
 
 import {
-    AllProducts,
+    AllProducts, DeleteProduct
 } from "../controller/controller.js";
 
 
 export const router = Router();
 router.get("/allProducts", AllProducts);
+router.delete("/deleteProduct/:IDProduct", DeleteProduct);
 
 
