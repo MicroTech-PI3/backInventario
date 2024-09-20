@@ -43,5 +43,18 @@ services:
     ports:
       -"6969:3000"
 
+  backInventario:
+    image: lexabernal/back_inventario:arm64
+    environment:
+      - APP_PORT=3000
+      - DB_HOST=mariadb
+      - DB_PORT=3307
+      - DB_USER=root
+      - DB_PASSWORD=my-password
+      - DB_DATABASE=MICROTECH
+      - HOST=microtech.icu
+    ports:
+      - "6666:3000"
+
 volumes:
   mariadb-data:
