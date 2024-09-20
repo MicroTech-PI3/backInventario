@@ -7,6 +7,6 @@ import {
 
 export const router = Router();
 router.get("/allProducts", AllProducts);
-router.delete("/deleteProduct/:IDProduct", DeleteProduct);
+router.delete("/product/:IDProduct", DeleteProduct);
 
 
