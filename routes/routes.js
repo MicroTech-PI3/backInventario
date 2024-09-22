@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { checkEndpoint } from "../controller/controller.js";
 
 import {
     /* AllProducts, DeleteProduct */
