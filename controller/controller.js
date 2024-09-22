@@ -42,3 +42,10 @@ export const DeleteProduct = async (req, res) => {
   }
 };
  */
+
+
+export const checkEndpoint= async (req, res) => {
+
+
+  res.status(200).json({ status: "Endpoint funcionando correctamente" });
+}
