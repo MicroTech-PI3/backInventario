@@ -54,7 +54,7 @@ services:
       - DB_DATABASE=MICROTECH
       - HOST=microtech.icu
     ports:
-      - "6666:3000"
+      - "2007:3000"
 
 volumes:
   mariadb-data:
