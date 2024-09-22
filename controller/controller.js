@@ -41,8 +41,10 @@ export const DeleteProduct = async (req, res) => {
     if (conn) conn.end();
   }
 };
- */
 
+holassss
+ */
+ 
 
 export const checkEndpoint= async (req, res) => {
 
