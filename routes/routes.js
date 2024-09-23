@@ -8,6 +8,7 @@ import {
 import {
     AllSuppliers, addSupplier, deleteSupplier, modidySupplier,
   } from "../controller/controller_suppliers.js";
+import { addCategory, AllCategories, deleteCategory, modifyCategory } from "../controller/controller_categories.js";
   //cambiar el nombre del endpoint
   
 
@@ -26,6 +27,11 @@ router.post("/suppliers/add", addSupplier);
 router.delete("/suppliers/delete/:id", deleteSupplier);
 router.post("/suppliers/update/:id", modidySupplier);
 
+//categories
+router.get("/categories/all", AllCategories);
+router.post("/categories/add", addCategory);
+router.delete("/categories/delete/:id", deleteCategory);
+router.post("/categories/update/:id", modifyCategory);
 
 
 
