@@ -11,9 +11,10 @@ import {
   //cambiar el nombre del endpoint
   
 
+//products
 export const router = Router();
-router.get("/allProducts", AllProducts);
-router.delete("/product/:IDProduct", DeleteProduct);
+router.get("/products/allProducts", AllProducts);
+router.delete("/products/delete/:IDProduct", DeleteProduct);
 
 //test
 router.get("/suppliers/check", checkEndpoint);
