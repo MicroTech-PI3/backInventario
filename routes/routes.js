@@ -15,7 +15,7 @@ import { addCategory, AllCategories, deleteCategory, modifyCategory } from "../c
 //products
 export const router = Router();
 router.get("/products/allProducts", AllProducts);
-router.delete("/products/delete/:IDProduct", DeleteProduct);
+router.delete("/products/delete/:IdProduct", DeleteProduct);
 
 //test
 router.get("/suppliers/check", checkEndpoint);
