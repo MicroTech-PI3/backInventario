@@ -16,7 +16,7 @@ router.get("/allProducts", AllProducts);
 router.delete("/product/:IDProduct", DeleteProduct);
 
 //test
-router.get("/check", checkEndpoint);
+router.get("/suppliers/check", checkEndpoint);
 
 
 //suppliers
