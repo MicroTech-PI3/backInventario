@@ -5,11 +5,27 @@ import {
     /* AllProducts, DeleteProduct */
 } from "../controller/controller.js";
 
+import {
+    AllSuppliers, addSupplier, deleteSupplier, modidySupplier
+  } from "../controller/controller_suppliers.js";
+  //cambiar el nombre del endpoint
+  
 
 export const router = Router();
 /* router.get("/allProducts", AllProducts);
 router.delete("/product/:IDProduct", DeleteProduct); */
 
+//test
 router.get("/check", checkEndpoint);
+
+//suppliers
+router.get("/suppliers/all", AllSuppliers);
+router.post("/suppliers/add", addSupplier);
+router.delete("/suppliers/delete/:id", deleteSupplier);
+router.post("/suppliers/update/:id", modidySupplier);
+
+
+
+
 
 
