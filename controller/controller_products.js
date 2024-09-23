@@ -42,7 +42,7 @@ export const DeleteProduct = async (req, res) => {
   }
 };
 
-holassss
+
 
 
 export const checkEndpoint= async (req, res) => {
