@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { checkEndpoint } from "../controller/controller.js";
+import { checkEndpoint } from "../controller/controller_products.js";
 
 import {
-    /* AllProducts, DeleteProduct */
-} from "../controller/controller.js";
+    AllProducts, DeleteProduct
+} from "../controller/controller_products.js";
 
 import {
     AllSuppliers, addSupplier, deleteSupplier, modidySupplier
@@ -12,8 +12,8 @@ import {
   
 
 export const router = Router();
-/* router.get("/allProducts", AllProducts);
-router.delete("/product/:IDProduct", DeleteProduct); */
+router.get("/allProducts", AllProducts);
+router.delete("/product/:IDProduct", DeleteProduct);
 
 //test
 router.get("/check", checkEndpoint);

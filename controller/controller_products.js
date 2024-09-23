@@ -1,6 +1,6 @@
 import pool from "../db/database.js";
 
-/* export const AllProducts = async (req, res) => {
+export const AllProducts = async (req, res) => {
   let conn;
   try {
     conn = await pool.getConnection();
@@ -43,8 +43,7 @@ export const DeleteProduct = async (req, res) => {
 };
 
 holassss
- */
- 
+
 
 export const checkEndpoint= async (req, res) => {
 
