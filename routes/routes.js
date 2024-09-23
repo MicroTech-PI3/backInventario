@@ -6,7 +6,7 @@ import {
 } from "../controller/controller_products.js";
 
 import {
-    AllSuppliers, addSupplier, deleteSupplier, modidySupplier, AllProducts
+    AllSuppliers, addSupplier, deleteSupplier, modidySupplier,
   } from "../controller/controller_suppliers.js";
   //cambiar el nombre del endpoint
   
@@ -17,14 +17,14 @@ router.delete("/product/:IDProduct", DeleteProduct);
 
 //test
 router.get("/check", checkEndpoint);
-router.get("/check/allProducts", AllProducts);
+
 
 //suppliers
 router.get("/suppliers/all", AllSuppliers);
 router.post("/suppliers/add", addSupplier);
 router.delete("/suppliers/delete/:id", deleteSupplier);
 router.post("/suppliers/update/:id", modidySupplier);
-router.get("/suppliers/allProducts", AllProducts);
+
 
 
 
