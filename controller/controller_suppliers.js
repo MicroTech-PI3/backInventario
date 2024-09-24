@@ -41,6 +41,8 @@ export const addSupplier = async (req, res) => {
 
     let conn;
     try {
+
+            console.log("Datos del proveedor a añadir: ", name, lastname, phone, email, city, brand);
         // Obtener la conexión
         conn = await pool.getConnection();
         console.log("Conexión establecida");
