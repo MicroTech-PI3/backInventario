@@ -43,24 +43,24 @@ export const DeleteProduct = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
-  const {name, price, description, quantity, category_id, supplier_id, image } = req.body; 
+  const {id, name, price, description, quantity, category_id, supplier_id } = req.body; 
 
   let conn;
   try {
-      console.log("Datos del producto a añadir: ", name, price, description, quantity, category_id, supplier_id, image);
+      console.log("Datos del producto a añadir: ", id, name, price, description, quantity, category_id, supplier_id);
       conn = await pool.getConnection();
       console.log("Conexión establecida");
 
       const query = `
-          INSERT INTO PRODUCT (ID, NAME, PRICE, DESCRIPTION, QUANTITY, CATEGORY_ID, SUPPLIER_ID, IMAGE)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+          INSERT INTO PRODUCT (ID, NAME, PRICE, DESCRIPTION, QUANTITY, CATEGORY_ID, SUPPLIER_ID)
+          VALUES (?, ?, ?, ?, ?, ?, ?);
       `;
 
-      await conn.query(query, [name, price, description, quantity, category_id, supplier_id, image]);
+      await conn.query(query, [id, name, price, description, quantity, category_id, supplier_id]);
 
       res.status(200).json({
           status: "Producto añadido exitosamente",
-          product: {name, price, description, quantity, category_id, supplier_id, image },
+          product: {id, name, price, description, quantity, category_id, supplier_id, image },
       });
 
   } catch (err) {
