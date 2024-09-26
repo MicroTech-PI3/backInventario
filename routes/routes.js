@@ -2,7 +2,7 @@ import { Router } from "express";
 import { checkEndpoint } from "../controller/controller_products.js";
 
 import {
-    AllProducts, DeleteProduct
+    AllProducts, DeleteProduct, addProduct
 } from "../controller/controller_products.js";
 
 import {
@@ -16,6 +16,7 @@ import { addCategory, AllCategories, deleteCategory, modifyCategory } from "../c
 export const router = Router();
 router.get("/products/allProducts", AllProducts);
 router.delete("/products/delete/:IdProduct", DeleteProduct);
+router.post("/products/addProduct", addProduct);
 
 //test
 router.get("/suppliers/check", checkEndpoint);
