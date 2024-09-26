@@ -52,8 +52,8 @@ export const addProduct = async (req, res) => {
       console.log("Conexión establecida");
 
       const query = `
-          INSERT INTO PRODUCT (ID, NAME, PRICE, DESCRIPTION, QUANTITY, CATEGORY_ID, SUPPLIER_ID, IMAGE)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+          INSERT INTO PRODUCT (NAME, PRICE, DESCRIPTION, QUANTITY, CATEGORY_ID, SUPPLIER_ID, IMAGE)
+          VALUES (?, ?, ?, ?, ?, ?, ?);
       `;
 
       await conn.query(query, [name, price, description, quantity, category_id, supplier_id, image]);
