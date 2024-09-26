@@ -71,6 +71,44 @@ export const addProduct = async (req, res) => {
   }
 };
 
+export const modifyProduct = async (req, res) => {
+  const { id } = req.params; // Obtiene el ID del producto de los parámetros
+  const { name, price, description, quantity, categoryId, supplierId } = req.body; // Obtiene los datos del producto del cuerpo de la petición
+
+  let conn;
+  try {
+    console.log("ID del producto a modificar: ", id);
+    // Obtener la conexión
+    conn = await pool.getConnection();
+    console.log("Conexión establecida");
+
+    // Definir la consulta SQL para actualizar el producto
+    const query = `
+      UPDATE PRODUCT
+      SET NAME = ?, PRICE = ?, DESCRIPTION = ?, QUANTITY = ?, CATEGORY_ID = ?, SUPPLIER_ID = ?
+      WHERE ID = ?;
+    `;
+
+    // Ejecutar la consulta con los valores recibidos
+    await conn.query(query, [name, price, description, quantity, categoryId, supplierId, id]);
+
+    // Responder con éxito
+    res.status(200).json({
+      status: "Producto modificado exitosamente",
+      id: id,
+      product: { name, price, description, quantity, categoryId, supplierId },
+    });
+  } catch (err) {
+    // Manejar errores
+    console.log("Error al modificar el producto", err);
+    res.status(500).json({ status: "Error al modificar el producto", error: err });
+  } finally {
+    // Asegurarse de cerrar la conexión
+    if (conn) conn.end();
+  }
+};
+
+
 
 export const checkEndpoint= async (req, res) => {
 
