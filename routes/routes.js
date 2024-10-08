@@ -10,6 +10,7 @@ import {
   } from "../controller/controller_suppliers.js";
 import { addCategory, AllCategories, deleteCategory, modifyCategory } from "../controller/controller_categories.js";
   //cambiar el nombre del endpoint
+import { employee } from "../controller/controller_empleado.js";
   
 
 //products
@@ -34,6 +35,9 @@ router.get("/categories/all", AllCategories);
 router.post("/categories/add", addCategory);
 router.delete("/categories/delete/:id", deleteCategory);
 router.post("/categories/update/:id", modifyCategory);
+
+//employees
+router.get("/employees/getEmployee", employee)
 
 
 
