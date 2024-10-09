@@ -1,16 +1,19 @@
 import pool from "../db/database.js";
 
-export const AllSuppliers = async (req, res) => {
+export const Allcustomers = async (req, res) => {
     let conn;
     try {
         conn = await pool.getConnection();
         console.log("Iniciando la conexión");
-        const rows = await conn.query("SELECT * FROM SUPPLIER;");
+        const rows = await conn.query("SELECT * FROM CUSTOMER;");
         console.log("Datos obtenidos: ", rows);
 
+        // Manejando el BigInt antes de enviar la respuesta porq al parecer alguien puso el numero de telefono
+        //como BIGINT............................
         const serializedRows = rows.map(row => {
             return Object.fromEntries(
                 Object.entries(row).map(([key, value]) => {
+                    // Convierte BigInt a string.............
                     return [key, typeof value === 'bigint' ? value.toString() : value];
                 })
             );
@@ -19,7 +22,7 @@ export const AllSuppliers = async (req, res) => {
         if (serializedRows.length > 0) {
             res.status(200).json({
                 status: "Se obtuvieron los datos correctamente",
-                suppliers: serializedRows, 
+                customers: serializedRows, 
             });
         } else {
             res.status(404).json({ status: "No se encontraron proveedores" });
@@ -33,43 +36,86 @@ export const AllSuppliers = async (req, res) => {
 };
 
 
-export const addSupplier = async (req, res) => {
-    const {name, lastname, phone, email, city, brand } = req.body; // Los datos del proveedor llegan en el cuerpo de la petición
+
+export const addCustomer = async (req, res) => {
+    const { id, name, lastname, phone, email, bill_via } = req.body; // Datos del cliente llegan en el cuerpo de la petición
 
     let conn;
     try {
-
-            console.log("Datos del proveedor a añadir: ", name, lastname, phone, email, city, brand);
+        console.log("Datos del cliente a añadir: ",id, name, lastname, phone, email, bill_via);
+        
         // Obtener la conexión
         conn = await pool.getConnection();
         console.log("Conexión establecida");
 
-        // Definir la consulta SQL
+        // Definir la consulta SQL para la tabla CUSTOMER
         const query = `
-            INSERT INTO SUPPLIER (NAME, LASTNAME, PHONE, EMAIL, CITY, BRAND)
+            INSERT INTO CUSTOMER (ID, NAME, LASTNAME, PHONE, EMAIL, BILL_VIA)
             VALUES (?, ?, ?, ?, ?, ?);
         `;
 
         // Ejecutar la consulta con los valores recibidos
-        await conn.query(query, [name, lastname, phone, email, city, brand]);
+        await conn.query(query, [id, name, lastname, phone, email, bill_via]);
 
         // Responder con éxito
         res.status(200).json({
-            status: "Proveedor añadido exitosamente",
-            supplier: {name, lastname, phone, email, city, brand },
+            status: "Cliente añadido exitosamente",
+            customer: { id, name, lastname, phone, email, bill_via },
         });
 
     } catch (err) {
         // Manejar errores
-        console.log("Error al añadir proveedor", err);
-        res.status(500).json({ status: "Error al añadir el proveedor", error: err });
+        console.log("Error al añadir cliente", err);
+        res.status(500).json({ status: "Error al añadir el cliente", error: err });
     } finally {
         // Asegurarse de cerrar la conexión
         if (conn) conn.end();
     }
 };
 
-export const deleteSupplier = async (req, res) => {
+export const modifyCustomer = async (req, res) => {
+
+    const { id } = req.params;
+    const { name, lastname, phone, email, bill_via } = req.body; // Los datos del proveedor llegan en el cuerpo de la petición
+
+    let conn;
+    try {
+        console.log("ID del cliente a modificar: ", id);
+        console.log("Datos del cliente a modificar: ", name, lastname, phone, email, bill_via);
+        
+        // Obtener la conexión
+        conn = await pool.getConnection();
+        console.log("Conexión establecida");
+
+        // Definir la consulta SQL para actualizar los datos del proveedor
+        const query = `
+            UPDATE CUSTOMER
+            SET NAME = ?, LASTNAME = ?, PHONE = ?, EMAIL = ?, BILL_VIA = ?
+            WHERE ID = ?;
+        `;
+
+        // Ejecutar la consulta con los valores recibidos y el ID del proveedor a modificar
+        await conn.query(query, [name, lastname, phone, email, bill_via, id]);
+
+        // Responder con éxito
+        res.status(200).json({
+            status: "Cliente modificado exitosamente",
+            customer: { id, name, lastname, phone, email, bill_via },
+        });
+
+    } catch (err) {
+        // Manejar errores
+        console.log("Error al modificar cliente", err);
+        res.status(500).json({ status: "Error al modificar el cliente", error: err });
+    } finally {
+        // Asegurarse de cerrar la conexión
+        if (conn) conn.end();
+    }
+}
+
+
+
+export const deleteCustomer = async (req, res) => {
 
     const { id } = req.params;
 
@@ -82,7 +128,7 @@ export const deleteSupplier = async (req, res) => {
 
         // Definir la consulta SQL
         const query = `
-            DELETE FROM SUPPLIER
+            DELETE FROM CUSTOMER
             WHERE ID = ?;
         `;
 
@@ -105,7 +151,7 @@ export const deleteSupplier = async (req, res) => {
     }
 }    
 
-export const modidySupplier = async (req, res) => {
+export const modidyCUSTOMER = async (req, res) => {
     
     
     const { id } = req.params;
@@ -120,7 +166,7 @@ export const modidySupplier = async (req, res) => {
 
         // Definir la consulta SQL
         const query = `
-            UPDATE SUPPLIER
+            UPDATE CUSTOMER
             SET NAME = ?, LASTNAME = ?, PHONE = ?, EMAIL = ?, CITY = ?, BRAND = ?
             WHERE ID = ?;
         `;
@@ -132,7 +178,7 @@ export const modidySupplier = async (req, res) => {
         res.status(200).json({
             status: "Proveedor modificado exitosamente",
             id: id,
-            supplier: {name, lastname, phone, email, city, brand },
+            CUSTOMER: {name, lastname, phone, email, city, brand },
         });
 
     } catch (err) {
